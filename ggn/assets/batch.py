@@ -137,17 +137,17 @@ async def run_batch(userbot, client, sender, countdown, link):
         timer = 15  # Increased default timer value
 
         if i < 250:
-            timer = 20
+            timer = 10
         elif 250 <= i < 1000:
-            timer = 25
+            timer = 15
         elif 1000 <= i < 10000:
-            timer = 30
+            timer = 20
         elif 10000 <= i < 50000:
-            timer = 35
+            timer = 25
         elif 50000 <= i < 100000:
-            timer = 40
+            timer = 30
         elif 100000 <= i < 200000:
-            timer = 45
+            timer = 35
         elif i >= 200000:
             timer = 60  # Increased timer value for larger counts
 
