@@ -1,3 +1,4 @@
+
 import pymongo
 from .. import bot as gagan
 from telethon import events, Button
@@ -55,7 +56,7 @@ async def start(event):
     user_id = event.sender_id
     collection.update_one({"user_id": user_id}, {"$set": {"user_id": user_id}}, upsert=True)
     buttons = [
-        [Button.url("Join Channel", url="https://t.me/devggn")],
+        [Button.url("Join Channel", url="https://t.me/kingofpatal")],
         [Button.url("Contact Me", url="https://t.me/ggnhere")],
     ]
     await gagan.send_file(
@@ -149,7 +150,7 @@ async def term_command(event):
     # Creating inline keyboard with buttons
     buttons = [
         [Button.url("Query?", url="https://t.me/ttonehelpbot"),
-         Button.url("Channel", url="https://telegram.dog/devggn")]
+         Button.url("Channel", url="https://telegram.dog/kingofpatal")]
     ]
 
     # Sending photo with caption and buttons
