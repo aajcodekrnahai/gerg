@@ -1,4 +1,5 @@
-# Join t.me/devggn
+
+# Join t.me/kingofpatal
 
 import re
 import asyncio, time, os
@@ -33,15 +34,28 @@ async def copy_message_with_chat_id(client, sender, chat_id, message_id):
         original_caption = msg.caption if msg.caption else ''
         final_caption = f"{original_caption}" if custom_caption else f"{original_caption}"
         
+        # delete_words = load_delete_words(sender)
+        # replacements = load_replacement_words(sender)
+        # for word in delete_words:
+        #     final_caption = final_caption.replace(word, '  ')
+        
+        # # replacements = load_replacement_words(sender)
+        # for word, replace_word in replacements.items():
+        #     final_caption = final_caption.replace(word, replace_word)
+        # Preserve formatting and special symbols
         delete_words = load_delete_words(sender)
         for word in delete_words:
-            final_caption = final_caption.replace(word, '  ')
-        
+            if word.isalnum():  # Only replace alphanumeric words
+                final_caption = final_caption.replace(word, '')
+
+        # Custom replacements
         replacements = load_replacement_words(sender)
         for word, replace_word in replacements.items():
-            final_caption = final_caption.replace(word, replace_word)
+            if word.isalnum():  # Only replace alphanumeric words
+               final_caption = final_caption.replace(word, replace_word)
+
         
-        caption = f"{final_caption}\n\n__**{custom_caption}**__" if custom_caption else f"{final_caption}"
+        caption = f"`{final_caption}`\n\n__**`{custom_caption}`**__" if custom_caption else f"`{final_caption}`"
         
         if msg.media:
             if msg.media == MessageMediaType.VIDEO:
@@ -112,7 +126,7 @@ async def send_video_with_chat_id(client, sender, path, caption, duration, hi, w
             progress=progress_for_pyrogram,
             progress_args=(
                 client,
-                '**__Uploading: [Team SPY](https://t.me/devggn)__**\n ',
+                '**__Uploading: [Team SPY](https://t.me/kingofpatal)__**\n ',
                 upm,
                 time.time()
             )
@@ -146,7 +160,7 @@ async def send_document_with_chat_id(client, sender, path, caption, thumb_path, 
             progress=progress_for_pyrogram,
             progress_args=(
                 client,
-                '**__Uploading:__**\n**__Bot made by [Team SPY](https://t.me/devggn)__**',
+                '**__Uploading:__**\n**__Bot made by [Team SPY](https://t.me/kingofpatal)__**',
                 upm,
                 time.time()
             )
@@ -365,7 +379,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, file_n):
                 await client.edit_message_text(sender, edit_id, 'poll media cant be saved')
                 return 
             edit = await client.edit_message_text(sender, edit_id, "__**Trying to Download**...")
-            file = await userbot.download_media(msg, progress=progress_for_pyrogram, progress_args=(client, "**__Unrestricting__: __[Team SPY](https://t.me/devggn)__**\n ", edit, time.time()))            # Retrieve user's custom renaming preference if set, default to '@devggn' otherwise
+            file = await userbot.download_media(msg, progress=progress_for_pyrogram, progress_args=(client, "**__Unrestricting__: __[Team SPY](https://t.me/kingofpatal)__**\n ", edit, time.time()))            # Retrieve user's custom renaming preference if set, default to '@kingofpatal' otherwise
             if not file:
               await client.send_message(sender, "Failed to download the media.")
               return None
@@ -432,7 +446,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, file_n):
                 replacements = load_replacement_words(sender)
                 for word, replace_word in replacements.items():
                     final_caption = final_caption.replace(word, replace_word)
-                caption = f"{final_caption}\n\n__**{custom_caption}**__" if custom_caption else f"{final_caption}"
+                caption = f"`{final_caption}`\n\n__**`{custom_caption}`**__" if custom_caption else f"`{final_caption}`"
                 await send_video_with_chat_id(client, sender, path, caption, duration, hi, wi, thumb_path, upm, msg.pinned_message)
             elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
                 if file_n != '':
@@ -471,7 +485,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, file_n):
                 replacements = load_replacement_words(sender)
                 for word, replace_word in replacements.items():
                     final_caption = final_caption.replace(word, replace_word)
-                caption = f"{final_caption}\n\n__**{custom_caption}**__" if custom_caption else f"{final_caption}"
+                caption = f"`{final_caption}`\n\n__**`{custom_caption}`**__" if custom_caption else f"`{final_caption}`"
                 await send_document_with_chat_id(client, sender, path, caption, thumb_path, upm, msg.pinned_message)
                     
             os.remove(file)
@@ -607,8 +621,8 @@ async def set_rename_command(user_id, custom_rename_tag):
 
 # Function to get the user's custom renaming preference
 def get_user_rename_preference(user_id):
-    # Retrieve the user's custom renaming tag if set, or default to '@devggn'
-    return user_rename_preferences.get(str(user_id), '@devggn')
+    # Retrieve the user's custom renaming tag if set, or default to '@kingofpatal'
+    return user_rename_preferences.get(str(user_id), '@kingofpatal')
 
 # Function to set custom caption preference
 async def set_caption_command(user_id, custom_caption):
@@ -635,7 +649,7 @@ async def settings_command(event):
         [Button.inline("Remove Words", b'delete')],
         [Button.inline("Login", b'addsession'), Button.inline("Logout", b'logout')],
         [Button.inline("Set Thumbnail", b'setthumb'), Button.inline("Remove Thumbnail", b'remthumb')],
-        [Button.url("Report Errors", "https://t.me/devggn")]
+        [Button.url("Report Errors", "https://t.me/kingofpatal")]
     ]
     
     await gf.send_file(
